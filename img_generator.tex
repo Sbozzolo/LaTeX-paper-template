@@ -1,0 +1,43 @@
+\documentclass[reprint, aps, prd, nofootinbib]{revtex4-2}
+
+\usepackage{graphicx}% Include figure files
+\usepackage[pdfusetitle]{hyperref}% add hypertext capabilities
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{siunitx}
+\usepackage{pgfplots}
+
+\usepgfplotslibrary{fillbetween}
+\usepgfplotslibrary{groupplots}
+\usetikzlibrary{spy}
+
+\pgfplotsset{compat=newest}
+
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+
+\usetikzlibrary{external}
+\tikzexternalize[optimize = false, prefix=figures_ext/]
+
+\newlength\figureheight
+\newlength\figurewidth
+
+\begin{document}
+
+\begin{figure}
+  \centering
+  \tikzsetnextfilename{FIGURENAME}
+  \setlength\figureheight{0.85\columnwidth}
+  \setlength\figurewidth{\columnwidth}
+  \input{figures/FIGURENAME.tikz}%
+\end{figure}
+
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-command-extra-options: "-shell-escape"
+%%% End:

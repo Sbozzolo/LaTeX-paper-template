@@ -1,0 +1,41 @@
+name: Build LaTeX document
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: PAPERNAME.tex
+          args: LATEXARGS
+          pre_compile: "sh compile_all_images.sh"
+          extra_system_packages: make
+      - name: Check pdf files
+        run: |
+          file PAPERNAME.pdf | grep -q ' PDF '
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pdf-file
+          path: PAPERNAME.pdf
+      - uses: actions/upload-artifact@v2
+        with:
+          name: images
+          path: figures_ext/*.pdf
+      - name: Commit pdf
+        run: |
+          ls -la
+          git checkout -b gh_actions_builds
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -f PAPERNAME.pdf
+          git add -f figures_ext/*.pdf
+          git commit -m "Add changes"
+      - name: Push files
+        uses: ad-m/github-push-action@v0.5.0
+        with:
+          branch: gh_actions_builds
+          force: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
