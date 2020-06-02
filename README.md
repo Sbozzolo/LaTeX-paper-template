@@ -43,3 +43,9 @@ in the in the `.tex` file, use `includegraphics` and include the figure in the
 You may need to edit the preamble of the `img_generator.tex` file to add
 additional packages or to change the class so that it matches the one of the
 paper.
+
+## GitHub actions
+
+GitHub action is a tool to perform some operations every time the repository is
+updated. Here, it is used to compile figures and the paper. The output can be
+found in the branch `gh_actions_builds` or in the Actions tab of the GitHub webpage.
