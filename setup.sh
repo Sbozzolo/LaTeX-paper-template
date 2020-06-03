@@ -39,6 +39,7 @@ sed -e "s/PAPERNAME/$name/g" \
 
 sed -e "s/PAPERAUTHOR/$AUTHOR/g" \
     -e "s/PAPEREMAIL/$EMAIL/g" \
+    -e "s/PAPERTITLE/$TITLE/g" \
     -e "s/PAPERAFFILIATION/$AFFILIATION/g" paper_template.tex > "$name"".tex_tmp"
 
 # Check if bibfile exists, in that case copy it here. If not, remove references
