@@ -58,5 +58,11 @@ rm Makefile_template
 rm paper_template.tex
 rm "$name"".tex_tmp"
 rm compile_template.yml
+rm README.md
+rm setup.sh
 
+git add Makefile
+git add "$name"".tex"
+git add "$name"".bib"
+git add .github/workflow/compile.yml
 git commit -am "First commit after paper generation"
