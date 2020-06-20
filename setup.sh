@@ -64,5 +64,5 @@ rm setup.sh
 git add Makefile
 git add "$name"".tex"
 git add "$name"".bib"
-git add .github/workflow/compile.yml
+git add .github/workflows/compile.yml
 git commit -am "First commit after paper generation"
