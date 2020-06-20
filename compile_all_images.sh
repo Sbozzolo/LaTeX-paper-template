@@ -10,12 +10,7 @@
 # TODO: This script is not really needed, it should be possible to do this
 #       directly with Makefile
 
-# HACK: Here xargs could be used with -r to prevent the execution of make when
-#       the list is empty. This works on GNU xargs, but fails with other
-#       implementations. As a workaround, we check if the directory is empty
-#       so that the code is portable
+# HACK: Here xargs is with -r to prevent the execution of make when the list is
+#       empty. This works on GNU xargs, but fails with other implementations.
 
-if [ $(find figures -type f -name "*.tikz") ]
-then
-    find figures -type f -name "*.tikz" -exec basename {} '.tikz' \; | sed -e 's/^/img\ IMG=/' | xargs -r make
-fi
+find figures -type f -name "*.tikz" -exec basename {} '.tikz' \; | sed -e 's/^/img\ IMG=/' | xargs -r make

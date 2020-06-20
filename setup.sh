@@ -39,6 +39,7 @@ sed -e "s/PAPERNAME/$name/g" \
 
 sed -e "s/PAPERAUTHOR/$AUTHOR/g" \
     -e "s/PAPEREMAIL/$EMAIL/g" \
+    -e "s/PAPERTITLE/$TITLE/g" \
     -e "s/PAPERAFFILIATION/$AFFILIATION/g" paper_template.tex > "$name"".tex_tmp"
 
 # Check if bibfile exists, in that case copy it here. If not, remove references
@@ -57,5 +58,11 @@ rm Makefile_template
 rm paper_template.tex
 rm "$name"".tex_tmp"
 rm compile_template.yml
+rm README.md
+rm setup.sh
 
+git add Makefile
+git add "$name"".tex"
+git add "$name"".bib"
+git add .github/workflow/compile.yml
 git commit -am "First commit after paper generation"
