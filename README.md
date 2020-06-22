@@ -7,7 +7,7 @@
 - Compile with `make`
 - Compile images with `pgfplots`
 - Compile automatically on GitHub with GitHub actions
-- (NOT IMPLEMENTED YET) Pre-process paper to prepare an arXiv submission tarball
+- Pre-process paper to prepare an arXiv submission tarball
 
 ## Setting up the paper
 
@@ -49,3 +49,13 @@ paper.
 GitHub action is a tool to perform some operations every time the repository is
 updated. Here, it is used to compile figures and the paper. The output can be
 found in the branch `gh_actions_builds` or in the Actions tab of the GitHub webpage.
+
+## ArXiv pre-processing
+
+The file `prepare_arxiv_sub.sh` creates a tarball ready to be uploaded to arXiv.
+The scripts collects files and figures, removes comments, and produces an
+archive. By default, the script includes the master file and the bibliography.
+Additional files can be added to the `files` variable in the script.
+
+The script is run as GitHub action every time something is pushed to GitHub. The
+output is an artifact in the Action tab.

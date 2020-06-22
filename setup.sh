@@ -32,6 +32,8 @@ sed -e "s/PAPERNAME/$name/g" \
     -e "s/LATEXEXE/$LATEX_EXE/g" \
     -e "s/LATEXARGS/$LATEX_ARGS/g" Makefile_template > Makefile
 
+sed -e "s/PAPERNAME/$name/g" prepare_arxiv_sub_template.sh > prepare_arxiv_sub.sh
+
 sed -e "s/PAPERNAME/$name/g" \
     -e "s/LATEXARGS/$LATEX_ARGS/g" compile_template.yml > .github/workflows/compile.yml
 
@@ -62,6 +64,7 @@ rm README.md
 rm setup.sh
 
 git add Makefile
+git add prepare_arxiv_sub.sh
 git add "$name"".tex"
 git add "$name"".bib"
 git add .github/workflows/compile.yml
