@@ -11,7 +11,7 @@ jobs:
         with:
           root_file: PAPERNAME.tex
           args: LATEXARGS
-          pre_compile: "sh compile_all_images.sh"
+          pre_compile: "make all_images"
           post_compile: "sh prepare_arxiv_sub.sh"
           extra_system_packages: make
       - name: Check pdf files

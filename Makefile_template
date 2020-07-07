@@ -1,13 +1,32 @@
-all: all_images
+FIGURES = figures
+FIGURES_EXT = figures_ext
+
+FIGURES_TIKZ = $(wildcard $(FIGURES)/*.tikz)
+TIKZ = $(FIGURES_TIKZ:$(FIGURES)/%=%)
+FIGURES_EXT_PDF = $(TIKZ:%.tikz=$(FIGURES_EXT)/%.pdf)
+
+# What is going on here?
+
+# Well, we want to regenerate the final pdf everytime a figure is updated.
+# Therefore, our "all" target must depend on all the pdfs of the figures. The
+# list of all these pdfs is in FIGURES_EXT_PDF. We generate this list in the
+# following way: first we find all the tikz in the FIGURES folder with
+# FIGURES_TIKZ = $(wildcard $(FIGURES)/*.tikz)
+# Then, we remove the prefix folder $(FIGURES) from the name:
+# TIKZ = $(FIGURES_TIKZ:$(FIGURES)/%=%)
+# As you see, we set $(FIGURES)/% to %, which amounts to removing FIGURES from
+# each file. Then, we produce the list with the pdf names
+# FIGURES_EXT_PDF = $(TIKZ:%.tikz=$(FIGURES_EXT)/%.pdf)
+
+all: PAPERNAME.tex $(FIGURES_EXT_PDF)
 	LATEXEXE LATEXARGS PAPERNAME.tex
 
-all_images:
-	./compile_all_images.sh
+all_images: $(FIGURES_EXT_PDF)
 
-img:
-	sed 's/FIGURENAME/$(IMG)/g' img_generator.tex > img_generator_tmp_$(IMG).tex
-	LATEXEXE LATEXARGS img_generator_tmp_$(IMG).tex
-	rm -rf img_generator_tmp_$(IMG).*
+$(FIGURES_EXT)/%.pdf: img_generator.tex $(FIGURES)/%.tikz
+	sed 's/FIGURENAME/$*/g' img_generator.tex > img_generator_tmp_$*.tex
+	LATEXEXE LATEXARGS img_generator_tmp_$*.tex
+	rm -rf img_generator_tmp_$*.*
 	rm -rf img_generator_tmp_*.bib
 	rm -rf figures_ext/*dpth figures_ext/*md5 figures_ext/*log figures_ext/*bib
 
