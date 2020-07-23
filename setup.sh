@@ -58,6 +58,7 @@ fi
 
 rm Makefile_template
 rm paper_template.tex
+rm prepare_arxiv_sub_template.sh
 rm "$name"".tex_tmp"
 rm compile_template.yml
 rm README.md
