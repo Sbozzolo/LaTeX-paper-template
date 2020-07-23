@@ -30,6 +30,12 @@ $(FIGURES_EXT)/%.pdf: img_generator.tex $(FIGURES)/%.tikz
 	rm -rf img_generator_tmp_*.bib
 	rm -rf figures_ext/*dpth figures_ext/*md5 figures_ext/*log figures_ext/*bib
 
+.PHONY: clean
+clean:
+	rm -f *.pdf *.out *.aux *.bbl *.blg *.log *.toc *.ptb *.tod *.fls *.fdb_latexmk *.lof
+	rm -f *.idx *.ind *.lot *.acn *.acr *.alg *.glg *.gls *.ist *.synctex.gz
+	rm -f $(FIGURES_EXT_PDF)
+
 ### Local Variables:
 ### mode: Makefile
 ### End:
