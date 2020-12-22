@@ -62,6 +62,7 @@ rm prepare_arxiv_sub_template.sh
 rm "$name"".tex_tmp"
 rm compile_template.yml
 rm README.md
+rm TODO.org
 rm setup.sh
 
 git add Makefile
